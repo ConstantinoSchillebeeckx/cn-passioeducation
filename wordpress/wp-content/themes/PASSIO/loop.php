@@ -3,7 +3,7 @@
 // get BC video library data
 //$dat = get_BC_db();
 if (!isset($GLOBALS['BC_db'])) {
-	$dat = json_decode(file_get_contents("wordpress/BC_DB.json"));
+	$dat = json_decode(file_get_contents(getcwd() . "/BC_DB.json"));
 	$GLOBALS['BC_db'] = $dat; // set to global for use later
 }
 
