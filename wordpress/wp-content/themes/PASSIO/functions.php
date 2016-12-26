@@ -168,14 +168,14 @@ function PASSIO_nav()
 
 	// if user is logged in, show a 'log out' menu; otherwise a 'log in' menu
 	if (is_user_logged_in()) {
-		$menu .= sprintf("<li><a href='%s'>Logout</a></li>", wp_logout_url());
+		$menu .= sprintf("<li><a href='%s'>登出</a></li>", wp_logout_url());
 	} else {
 		if (strpos($_SERVER['REQUEST_URI'],'category') !== false) { // if on the category/publications page, redirect to there instead of a post/page
 			$redirect_link = get_category_link( get_cat_ID( 'publications' ));
 		} else {
 			$redirect_link = get_permalink();
 		}
-		$menu .= sprintf("<li><a href='/wordpress/wp-login.php?redirect_to=%s'>Login</a></li>", $redirect_link);
+		$menu .= sprintf("<li><a href='/wordpress/wp-login.php?redirect_to=%s'>登录</a></li>", $redirect_link);
 	}
 	echo $menu;
 	get_template_part('searchform');
@@ -535,9 +535,9 @@ function publication_head($query) {
     }
     echo '</h5>';
 	if ( isset($post_dat->Disclosure) && $post_dat->Disclosure != '' ) {
-	    echo sprintf('<p class="text-muted"><strong>Disclosure</strong>: %s</p>', $post_dat->Disclosure);
+	    echo sprintf('<p class="text-muted"><strong>公用</strong>: %s</p>', $post_dat->Disclosure);
 	} else {
-	    echo '<p class="text-muted"><strong>Disclosure</strong>: No authors have a financial interest in any of the products, devices, or drugs mentioned in this production or publication.</p>';
+	    echo '<p class="text-muted"><strong>公用</strong>: 作者与本视频中提到的任何产品，设备或药物没有经济利益关系。</p>';
 
 	}
     echo sprintf('<p class="description">%s</p>', $post_dat->Description);
@@ -619,7 +619,7 @@ function publication_toc($url, $type) {
 // returns valid html
 function print_toc($vtt, $type) {
 
-    $html = '<h4>Table of Contents</h4>';
+    $html = '<h4>目录</h4>';
     foreach ($vtt as $time => $val) {
         $html .= sprintf('<div id="toc-%s-%s"><a href="#" onclick="seek(this, %s, %s); return false;"><b><u>%s</u></b><span style="color:rgb(68,68,68)"> - %s</span></a></div>', $type, time_code_to_s($time), time_code_to_s($time), $type, $time, $val);
     }
@@ -693,9 +693,9 @@ function PASSIOexcerpt($text, $length = 800, $read_more=true) {
 	$url = sprintf('<b><a href="%s">[Read more]</a></b>', get_permalink());
 	if (strlen($text) > $length) {
 		if ($read_more) {
-			return substr($text, 0, $length) . '... ' . $url;
+			return substr($text, 0, $length) . ' ... ' . $url;
 		} else {
-			return substr($text, 0, $length) . '... ';
+			return substr($text, 0, $length) . ' ... ';
 		}
 	} else {
 		return $text;
@@ -780,7 +780,7 @@ add_action( 'login_enqueue_scripts', 'passio_login_logo' );
 
 add_filter( 'login_headerurl', 'custom_loginlogo_url' );
 function custom_loginlogo_url($url) {
-    return 'http://www.passioeducation.com';
+    return 'http://cn.passioeducation.com';
 }
 
 

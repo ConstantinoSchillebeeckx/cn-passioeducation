@@ -1,11 +1,10 @@
 <?php get_header();
 $user_role = get_user_role(); // user must be logged in to view posts
 if (!isset($GLOBALS['BC_db'])) {
-	$dat = json_decode(file_get_contents("wordpress/BC_DB.json"));
+	$dat = json_decode(file_get_contents("http://www.passioeducation.com/wordpress/BC_DB.json")); // XXX need to update when moving over to china hosted site
 } else {
 	$dat = $GLOBALS['BC_db'];
 }
-
 ?>
 
 	<main role="main" id="<?php echo 'post-' . get_the_ID(); ?>">
@@ -76,7 +75,7 @@ if (!isset($GLOBALS['BC_db'])) {
                     if (!in_array("login_all", $tags) || isset($user_role)) {
                         if ($stand_id || $pres_id) { 
                         ?>
-                        <p style="margin-top:30px;" class="lead"><u><?php echo ($stand_id ? 'Standard Edition' : 'Presentation'); ?></u></p>
+                        <p style="margin-top:30px;" class="lead"><u><?php echo ($stand_id ? '标准版' : 'Presentation'); ?></u></p>
                             <div style="display: block; position: relative; max-width: 100%;">
                                 <div style="padding-top: 56.25%;">
                                     <video id="standard"
@@ -99,7 +98,7 @@ if (!isset($GLOBALS['BC_db'])) {
                         if (!in_array("login_extended", $tags) || isset($user_role)) {
                             if ( $ext_id || $exam_id) {
                             ?>
-                            <p style="margin-top:30px;" class="lead"><u><?php echo $ext_id ? 'Extended Edition' : 'Examination'; ?></u></p>
+                            <p style="margin-top:30px;" class="lead"><u><?php echo $ext_id ? '扩展版' : 'Examination'; ?></u></p>
                                 <div style="display: block; position: relative; max-width: 100%;">
                                     <div style="padding-top: 56.25%;">
                                         <video id="extended"
@@ -140,8 +139,6 @@ if (!isset($GLOBALS['BC_db'])) {
                                     <ol class="vjs-playlist"></ol>
                                 <?php publication_toc($dressing_toc, 'dressing');
                                 
-                                // echo HTML stored in footer custom field
-                                echo get_post_meta( $post->ID, 'footer', true);
                             }
 
 
@@ -156,6 +153,8 @@ if (!isset($GLOBALS['BC_db'])) {
                                 }
                                 echo '</div></div>';
                             }
+                            // echo HTML stored in footer custom field
+                            echo get_post_meta( $post->ID, 'footer', true);
                         } else {
                             must_login(null, 'to view the full article and extended video on this page.');
                         }

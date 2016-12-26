@@ -3,7 +3,7 @@
 
 				<!-- copyright -->
 				<p class="copyright">
-					Copyright &copy; <?php echo date('Y'); ?> PASSIO Surgical Education. All Rights Reserved.
+					版权 &copy; <?php echo date('Y'); ?> PASSIO 外科 教育. 版权所有.
 				</p>
 				<!-- /copyright -->
 
